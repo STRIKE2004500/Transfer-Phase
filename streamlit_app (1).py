@@ -100,3 +100,15 @@ with st.form("registration_form"):
                 st.balloons()
             except Exception as e:
                 st.error(f"Failed to save data: {str(e)}")
+
+# Add credit to STRIKE at the bottom of the page
+st.markdown("---")  # Horizontal line for separation
+st.markdown(
+    """
+    <div style="text-align: center; padding: 20px; background-color: #0E1117; border-radius: 10px;">
+        <h3 style="color: #ffffff;">Developed by STRIKE</h3>
+        <p style="color: #ffffff;">For alliance management and state transfer coordination</p>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
