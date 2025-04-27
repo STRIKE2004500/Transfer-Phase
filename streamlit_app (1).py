@@ -34,7 +34,7 @@ with st.form("registration_form"):
     
     # Power input with number validation
     power = st.number_input(
-        "What is your power? (numbers only, max 2 decimals)*",
+        "What is your power?*",
         min_value=0.0,
         format="%.2f",
         step=0.01,
