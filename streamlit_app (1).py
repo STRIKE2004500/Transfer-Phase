@@ -25,12 +25,8 @@ with st.form("registration_form"):
     # Player Information
     player_name = st.text_input("Enter your in-game name*", key="player_name")
     
-    # Alliance Selection
-    alliance = st.selectbox(
-        "What is Your Alliance?*",
-        ["TCW", "MRA", "RFA", "SHR"],
-        index=0
-    )
+    # Alliance Selection (changed from dropdown to text input)
+    alliance = st.text_input("What is Your Alliance?*", key="alliance")
     
     # FC Level
     fc_level = st.selectbox(
@@ -58,25 +54,14 @@ with st.form("registration_form"):
         index=0
     )
     
-    # Availability Times
-    joining_from = st.selectbox(
-        "Joining FROM*",
-        ["12:00 UTC", "13:00 UTC", "14:00 UTC", "15:00 UTC", "16:00 UTC", "17:00 UTC"],
-        index=0
-    )
-    
-    joining_to = st.selectbox(
-        "TO*",
-        ["12:00 UTC", "13:00 UTC", "14:00 UTC", "15:00 UTC", "16:00 UTC", "17:00 UTC", "18:00 UTC"],
-        index=0
-    )
-    
     # Submit Button
     submitted = st.form_submit_button("Submit Registration")
     
     if submitted:
         if not player_name:
             st.error("Please enter your in-game name")
+        elif not alliance:
+            st.error("Please enter your alliance name")
         else:
             # Prepare the data row
             timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -87,9 +72,7 @@ with st.form("registration_form"):
                 fc_level,
                 infantry_level,
                 lancer_level,
-                marksman_level,
-                joining_from,
-                joining_to
+                marksman_level
             ]
             
             try:
@@ -99,4 +82,3 @@ with st.form("registration_form"):
                 st.balloons()
             except Exception as e:
                 st.error(f"Failed to save data: {str(e)}")
-
