@@ -25,8 +25,21 @@ with st.form("registration_form"):
     # Player Information
     player_name = st.text_input("Enter your in-game name*", key="player_name")
     
-    # Alliance Selection (changed from dropdown to text input)
-    alliance = st.text_input("What is Your Alliance?*", key="alliance")
+    # Alliance Selection
+    alliance = st.text_input("What is Your Current Alliance?*", key="alliance")
+    
+    # New fields
+    reason_for_leaving = st.text_input("What is the Reason for leaving your original state?", key="reason_for_leaving")
+    planned_alliance = st.text_input("Which alliance are you planning to join?", key="planned_alliance")
+    
+    # Power input with number validation
+    power = st.number_input(
+        "What is your power? (numbers only, max 2 decimals)*",
+        min_value=0.0,
+        format="%.2f",
+        step=0.01,
+        key="power"
+    )
     
     # FC Level
     fc_level = st.selectbox(
@@ -61,7 +74,9 @@ with st.form("registration_form"):
         if not player_name:
             st.error("Please enter your in-game name")
         elif not alliance:
-            st.error("Please enter your alliance name")
+            st.error("Please enter your current alliance name")
+        elif power <= 0:
+            st.error("Please enter a valid power value (greater than 0)")
         else:
             # Prepare the data row
             timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -69,6 +84,9 @@ with st.form("registration_form"):
                 timestamp,
                 player_name,
                 alliance,
+                reason_for_leaving,
+                planned_alliance,
+                f"{power:.2f}",  # Format power to 2 decimal places
                 fc_level,
                 infantry_level,
                 lancer_level,
